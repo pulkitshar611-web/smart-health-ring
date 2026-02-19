@@ -20,18 +20,19 @@ const generateRefreshToken = (userId) => {
 // @access  Public
 exports.register = async (req, res, next) => {
     try {
-        const { fullName, email, phone, password, dateOfBirth, gender } = req.body;
+        const { fullName, email, phone, password } = req.body;
 
         // Validation
-        if (!fullName || !email || !password) {
+        if (!fullName || !email || !phone || !password) {
             return res.status(400).json({
                 success: false,
                 error: {
                     code: 'VALIDATION_ERROR',
-                    message: 'Please provide fullName, email, and password',
+                    message: 'Please provide all required fields',
                     details: [
                         { field: 'fullName', message: 'Full name is required' },
                         { field: 'email', message: 'Email is required' },
+                        { field: 'phone', message: 'Mobile number is required' },
                         { field: 'password', message: 'Password is required' }
                     ]
                 }
@@ -87,7 +88,10 @@ exports.register = async (req, res, next) => {
 // @access  Public
 exports.login = async (req, res, next) => {
     try {
-        const { identifier, password } = req.body;
+        let { identifier, password } = req.body;
+
+        if (identifier) identifier = identifier.trim();
+        if (password) password = password.trim();
 
         // Validation
         if (!identifier || !password) {
@@ -117,11 +121,11 @@ exports.login = async (req, res, next) => {
 
         if (!user) {
             console.log(`❌ Auth Failure: User not found for identifier [${searchIdentifier}]`);
-            return res.status(401).json({
+            return res.status(404).json({
                 success: false,
                 error: {
-                    code: 'UNAUTHORIZED',
-                    message: 'Invalid credentials'
+                    code: 'USER_NOT_FOUND',
+                    message: 'Account not found. Would you like to create a new account?'
                 }
             });
         }
@@ -149,6 +153,8 @@ exports.login = async (req, res, next) => {
         await user.save();
 
         // Generate tokens
+        const secret = process.env.JWT_SECRET;
+        console.log(`🔐 Signing Token with Secret Length: ${secret ? secret.length : 'MISSING'}`);
         const token = generateToken(user._id);
         const refreshToken = generateRefreshToken(user._id);
 
@@ -353,6 +359,103 @@ exports.deleteAccount = async (req, res, next) => {
         res.status(200).json({
             success: true,
             message: 'Account deleted successfully'
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+// @desc    Get all users (Public for Dashboard Demo)
+// @route   GET /api/v1/auth/users
+// @access  Public
+exports.getAllUsers = async (req, res, next) => {
+    try {
+        const { search } = req.query;
+        let query = {};
+
+        if (search) {
+            query = {
+                $or: [
+                    { fullName: { $regex: search, $options: 'i' } },
+                    { phone: { $regex: search, $options: 'i' } },
+                    { email: { $regex: search, $options: 'i' } }
+                ]
+            };
+        }
+
+        const users = await User.find(query)
+            .select('-password')
+            .sort({ createdAt: -1 });
+
+        res.status(200).json({
+            success: true,
+            count: users.length,
+            data: users
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+// @desc    Update user by ID (Admin)
+// @route   PUT /api/v1/auth/users/:id
+// @access  Private
+exports.updateUserById = async (req, res, next) => {
+    try {
+        const { fullName, email, phone, plan, status } = req.body;
+
+        // Find user
+        let user = await User.findById(req.params.id);
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found'
+            });
+        }
+
+        // Update fields
+        if (fullName) user.fullName = fullName;
+        if (email) user.email = email;
+        if (phone) user.phone = phone;
+        // if (plan) user.plan = plan; // Assuming plan is in schema, if not it will be ignored by mongoose strict mode usually, or we can add it providing schema supports it. keeping it simple.
+        // if (status) user.status = status; 
+
+        // Note: For real admin functionality, you'd want to update roles/plans etc. 
+        // passing body directly to allow flexibility if schema permits
+
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true
+        });
+
+        res.status(200).json({
+            success: true,
+            data: updatedUser
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+// @desc    Delete user by ID (Admin)
+// @route   DELETE /api/v1/auth/users/:id
+// @access  Private
+exports.deleteUserById = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id);
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found'
+            });
+        }
+
+        await user.deleteOne();
+
+        res.status(200).json({
+            success: true,
+            message: 'User deleted successfully'
         });
     } catch (error) {
         next(error);

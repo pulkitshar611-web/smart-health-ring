@@ -67,7 +67,7 @@ smart-health-backend/
 
 ## 📡 **Available API Endpoints**
 
-### **Base URL:** `http://localhost:5000/api/v1`
+### **Base URL:** `https://smart-health-ring-production.up.railway.app/api/v1`
 
 ### **Authentication**
 | Method | Endpoint | Description | Auth Required |
@@ -107,15 +107,15 @@ npm run dev
 ### **Step 3: Test**
 ```bash
 # Health Check
-curl http://localhost:5000/health
+curl https://smart-health-ring-production.up.railway.app/health
 
 # Register User
-curl -X POST http://localhost:5000/api/v1/auth/register \
+curl -X POST https://smart-health-ring-production.up.railway.app/api/v1/auth/register \
   -H "Content-Type: application/json" \
   -d '{"fullName":"Test User","email":"test@example.com","password":"Test123!@#"}'
 
 # Login
-curl -X POST http://localhost:5000/api/v1/auth/login \
+curl -X POST https://smart-health-ring-production.up.railway.app/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{"identifier":"test@example.com","password":"Test123!@#"}'
 ```

@@ -36,8 +36,8 @@ npm run dev
 **Expected Output:**
 ```
 🚀 Server running in development mode on port 5000
-📡 API Base URL: http://localhost:5000/api/v1
-💚 Health Check: http://localhost:5000/health
+📡 API Base URL: https://smart-health-ring-production.up.railway.app/api/v1
+💚 Health Check: https://smart-health-ring-production.up.railway.app/health
 ✅ MongoDB Connected: localhost
 ```
 
@@ -47,12 +47,12 @@ npm run dev
 
 **Browser mein open karo:**
 ```
-http://localhost:5000/health
+https://smart-health-ring-production.up.railway.app/health
 ```
 
 **Ya terminal mein:**
 ```bash
-curl http://localhost:5000/health
+curl https://smart-health-ring-production.up.railway.app/health
 ```
 
 **Expected Response:**
@@ -69,7 +69,7 @@ curl http://localhost:5000/health
 ### Step 4: Register a Test User
 
 ```bash
-curl -X POST http://localhost:5000/api/v1/auth/register \
+curl -X POST https://smart-health-ring-production.up.railway.app/api/v1/auth/register \
   -H "Content-Type: application/json" \
   -d "{\"fullName\":\"Test User\",\"email\":\"test@example.com\",\"password\":\"Test123!@#\"}"
 ```
@@ -92,7 +92,7 @@ curl -X POST http://localhost:5000/api/v1/auth/register \
 ### Step 5: Login
 
 ```bash
-curl -X POST http://localhost:5000/api/v1/auth/login \
+curl -X POST https://smart-health-ring-production.up.railway.app/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d "{\"identifier\":\"test@example.com\",\"password\":\"Test123!@#\"}"
 ```
@@ -124,7 +124,7 @@ curl -X POST http://localhost:5000/api/v1/auth/login \
 **Replace `YOUR_TOKEN_HERE` with actual token:**
 
 ```bash
-curl -X POST http://localhost:5000/api/v1/biometrics \
+curl -X POST https://smart-health-ring-production.up.railway.app/api/v1/biometrics \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_TOKEN_HERE" \
   -d "{\"heartRate\":72,\"oxygenLevel\":98,\"hrvRmssd\":42,\"recoveryScore\":84,\"source\":\"manual\"}"
@@ -147,7 +147,7 @@ curl -X POST http://localhost:5000/api/v1/biometrics \
 ### Step 7: Get Latest Biometric Data
 
 ```bash
-curl -X GET http://localhost:5000/api/v1/biometrics/latest \
+curl -X GET https://smart-health-ring-production.up.railway.app/api/v1/biometrics/latest \
   -H "Authorization: Bearer YOUR_TOKEN_HERE"
 ```
 
@@ -175,7 +175,7 @@ curl -X GET http://localhost:5000/api/v1/biometrics/latest \
 
 Create new requests in Postman:
 
-**Base URL:** `http://localhost:5000/api/v1`
+**Base URL:** `https://smart-health-ring-production.up.railway.app/api/v1`
 
 ### 2. Create Requests
 
@@ -268,7 +268,7 @@ In your React Native app:
 
 ```javascript
 // services/api.js
-const API_BASE_URL = 'http://localhost:5000/api/v1';
+const API_BASE_URL = 'https://smart-health-ring-production.up.railway.app/api/v1';
 
 // For Android emulator:
 const API_BASE_URL = 'http://10.0.2.2:5000/api/v1';

@@ -64,13 +64,13 @@ npm run dev
 npm start
 ```
 
-Server will start at: `http://localhost:5000`
+Server will start at: `https://smart-health-ring-production.up.railway.app`
 
 ## 📡 API Endpoints
 
 ### Base URL
 ```
-http://localhost:5000/api/v1
+https://smart-health-ring-production.up.railway.app/api/v1
 ```
 
 ### Health Check
@@ -99,7 +99,7 @@ GET  /api/v1/biometrics/history - Get history (Protected)
 
 **Register User:**
 ```bash
-curl -X POST http://localhost:5000/api/v1/auth/register \
+curl -X POST https://smart-health-ring-production.up.railway.app/api/v1/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "fullName": "John Doe",
@@ -110,7 +110,7 @@ curl -X POST http://localhost:5000/api/v1/auth/register \
 
 **Login:**
 ```bash
-curl -X POST http://localhost:5000/api/v1/auth/login \
+curl -X POST https://smart-health-ring-production.up.railway.app/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "identifier": "john@example.com",
@@ -120,7 +120,7 @@ curl -X POST http://localhost:5000/api/v1/auth/login \
 
 **Add Biometric Data:**
 ```bash
-curl -X POST http://localhost:5000/api/v1/biometrics \
+curl -X POST https://smart-health-ring-production.up.railway.app/api/v1/biometrics \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_TOKEN_HERE" \
   -d '{

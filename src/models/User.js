@@ -20,14 +20,15 @@ const userSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
+        required: [true, 'Mobile number is required'],
         unique: true,
-        sparse: true,
-        trim: true
+        trim: true,
+        match: [/^\d{10}$/, 'Mobile number must be exactly 10 digits']
     },
     password: {
         type: String,
         required: [true, 'Password is required'],
-        minlength: [8, 'Password must be at least 8 characters'],
+        minlength: [6, 'Password must be at least 6 characters'],
         select: false // Don't return password by default
     },
     avatar: {

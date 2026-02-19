@@ -120,11 +120,12 @@ cd smart-health-backend
 npm run dev
 ```
 
+
 **Expected Output:**
 ```
 🚀 Server running in development mode on port 5000
-📡 API Base URL: http://localhost:5000/api/v1
-💚 Health Check: http://localhost:5000/health
+📡 API Base URL: https://smart-health-ring-production.up.railway.app/api/v1
+💚 Health Check: https://smart-health-ring-production.up.railway.app/health
 ✅ MongoDB Connected: localhost
 ```
 
@@ -143,7 +144,7 @@ npm run dev
 
 ### **Test 1: Check Server Health**
 ```bash
-curl http://localhost:5000/health
+curl https://smart-health-ring-production.up.railway.app/health
 ```
 
 **Expected:**
@@ -157,7 +158,7 @@ curl http://localhost:5000/health
 
 ### **Test 2: Register a User**
 ```bash
-curl -X POST http://localhost:5000/api/v1/auth/register \
+curl -X POST https://smart-health-ring-production.up.railway.app/api/v1/auth/register \
   -H "Content-Type: application/json" \
   -d "{\"fullName\":\"Test User\",\"email\":\"test@example.com\",\"password\":\"Test123!@#\"}"
 ```

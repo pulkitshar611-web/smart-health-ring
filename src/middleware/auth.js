@@ -11,6 +11,7 @@ const protect = async (req, res, next) => {
         }
 
         if (!token) {
+            console.log('❌ Auth Failed: No token provided in header');
             return res.status(401).json({
                 success: false,
                 error: {
@@ -22,12 +23,16 @@ const protect = async (req, res, next) => {
 
         try {
             // Verify token
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            const secret = process.env.JWT_SECRET;
+            console.log(`🔐 Verifying Token: ${token.substring(0, 10)}... | Secret Length: ${secret ? secret.length : 'MISSING'}`);
+            const decoded = jwt.verify(token, secret);
+            console.log(`✅ Token Verified. User ID: ${decoded.userId}`);
 
             // Get user from token
             req.user = await User.findById(decoded.userId).select('-password');
 
             if (!req.user) {
+                console.log(`❌ Auth Failed: User not found for ID ${decoded.userId}`);
                 return res.status(401).json({
                     success: false,
                     error: {
@@ -38,6 +43,7 @@ const protect = async (req, res, next) => {
             }
 
             if (!req.user.isActive) {
+                console.log(`❌ Auth Failed: User ${req.user._id} is deactivated`);
                 return res.status(401).json({
                     success: false,
                     error: {
@@ -49,6 +55,7 @@ const protect = async (req, res, next) => {
 
             next();
         } catch (error) {
+            console.error('❌ Auth Verification Error:', error.message);
             return res.status(401).json({
                 success: false,
                 error: {

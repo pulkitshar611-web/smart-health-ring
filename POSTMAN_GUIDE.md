@@ -267,7 +267,7 @@ npm run dev
 ### ❌ "404 Not Found"
 **Problem:** Wrong URL or route  
 **Solution:**
-- Check `baseUrl` in environment: `http://localhost:5000/api/v1`
+- Check `baseUrl` in environment: `https://smart-health-ring-production.up.railway.app/api/v1`
 - Ensure server is running on port 5000
 
 ### ❌ "409 Conflict - User already exists"

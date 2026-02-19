@@ -1,0 +1,68 @@
+Found 11 users.
+
+User 1:
+ID: 6992e7dabd22e783f34d5ec3
+Email: arav@gmail.com
+Name: Arav
+Phone: 9876543210
+-----------------
+User 2:
+ID: 6992ee6ed4b5b77e40a7439e
+Email: ritu@gmail.com
+Name: Ritu
+Phone: undefined
+-----------------
+User 3:
+ID: 6992f2997366d1069f95f9d8
+Email: diya@gmail.com
+Name: Diya
+Phone: undefined
+-----------------
+User 4:
+ID: 6993185121cc0e0e97f7f924
+Email: riya@gmail.com
+Name: Riya
+Phone: undefined
+-----------------
+User 5:
+ID: 6993fd9921cc0e0e97f7f964
+Email: yash@gmail.com
+Name: Yash
+Phone: undefined
+-----------------
+User 6:
+ID: 69940c5721cc0e0e97f7f96e
+Email: ltlalit15@gmail.com
+Name: Lalit
+Phone: undefined
+-----------------
+User 7:
+ID: 699419d521cc0e0e97f7f9cd
+Email: nigamankita76@gmail.com
+Name: Ankita
+Phone: undefined
+-----------------
+User 8:
+ID: 69941efc21cc0e0e97f7f9da
+Email: neha@gmail.com
+Name: Neha singh
+Phone: 7000556991
+-----------------
+User 9:
+ID: 69955ac3e41aa1dfdce1f1fe
+Email: rahul@gmail.com
+Name: Rahul
+Phone: 7888556991
+-----------------
+User 10:
+ID: 699561f0e41aa1dfdce1f201
+Email: priya@gmail.com
+Name: Priya
+Phone: 9724324549
+-----------------
+User 11:
+ID: 69956278e41aa1dfdce1f20b
+Email: rahul76@gmail.com
+Name: Rahul
+Phone: 9827324549
+-----------------
