@@ -41,6 +41,7 @@ app.use(helmet()); // Security headers
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:8081",
+  "https://smart-health-ring.kiaantechnology.com",
   process.env.FRONTEND_URL
 ].filter(Boolean);
 
