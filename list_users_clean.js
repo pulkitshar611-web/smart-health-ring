@@ -6,7 +6,7 @@ const User = require('./src/models/User');
 
 dotenv.config();
 
-const MONGO_URI = process.env.MONGO_URI || process.env.MONGODB_URI;
+const MONGO_URI = process.env.MONGODB_URI || process.env.MONGODB_URI;
 const outputFile = path.join(__dirname, 'users_list.txt');
 
 if (fs.existsSync(outputFile)) fs.unlinkSync(outputFile);

@@ -4,7 +4,7 @@ const User = require('./src/models/User');
 
 dotenv.config();
 
-const MONGO_URI = process.env.MONGO_URI || process.env.MONGODB_URI;
+const MONGO_URI = process.env.MONGODB_URI || process.env.MONGODB_URI;
 
 if (!MONGO_URI) {
     console.error("❌ MONGO_URI not found");
