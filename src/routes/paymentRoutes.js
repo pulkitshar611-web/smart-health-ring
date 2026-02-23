@@ -6,13 +6,13 @@ const {
     getUserPayments
 } = require('../controllers/paymentController');
 
-const { protect } = require('../middleware/auth');
+const { protect, authorize } = require('../middleware/auth');
 
 router.use(protect);
 
 router
     .route('/')
-    .get(getPayments)
+    .get(authorize('admin'), getPayments)
     .post(createPayment);
 
 router.get('/user/:userId', getUserPayments);

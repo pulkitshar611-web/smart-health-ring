@@ -75,4 +75,37 @@ const protect = async (req, res, next) => {
     }
 };
 
-module.exports = { protect };
+// Grant access to specific roles
+const authorize = (...roles) => {
+    return (req, res, next) => {
+        // 1. Check if user exists (should be handled by protect, but being safe)
+        if (!req.user) {
+            return res.status(401).json({
+                success: false,
+                error: { code: 'UNAUTHORIZED', message: 'Not authorized' }
+            });
+        }
+
+        // 2. Map role based on project logic
+        // In this project, admins are identified by 'admin' role or specific admin emails
+        const isAdmin = req.user.role === 'admin' ||
+            req.user.email?.toLowerCase().endsWith('@smarthealth.com') && req.user.email?.toLowerCase().includes('admin');
+
+        // 3. Check if user has required role
+        const userRole = isAdmin ? 'admin' : 'user';
+
+        if (!roles.includes(userRole)) {
+            return res.status(403).json({
+                success: false,
+                error: {
+                    code: 'FORBIDDEN',
+                    message: `User role [${userRole}] is not authorized to access this route`
+                }
+            });
+        }
+
+        next();
+    };
+};
+
+module.exports = { protect, authorize };

@@ -37,9 +37,31 @@ const biometricDataSchema = new mongoose.Schema({
     // Circadian
     circadianState: {
         type: String,
-        enum: ['peak_performance', 'rest', 'recovery', 'active']
+        enum: ['peak_performance', 'rest', 'recovery', 'active', 'Unknown', 'Normal', 'Optimal']
     },
     bodyClockTime: String, // HH:mm format
+
+    // Daily Metrics (added for ring sync)
+    steps: {
+        type: Number,
+        default: 0
+    },
+    calories: {
+        type: Number,
+        default: 0
+    },
+    sleepDuration: {
+        type: Number, // in hours
+        default: 0
+    },
+    waterIntake: {
+        type: Number, // in liters
+        default: 0
+    },
+    activityDuration: {
+        type: Number, // in minutes
+        default: 0
+    },
 
     // Source tracking (for hardware integration)
     source: {
@@ -48,6 +70,11 @@ const biometricDataSchema = new mongoose.Schema({
         default: 'manual'
     },
     deviceId: String,
+    batteryLevel: Number,
+    isCharging: {
+        type: Boolean,
+        default: false
+    },
 
     // Metadata
     timestamp: {

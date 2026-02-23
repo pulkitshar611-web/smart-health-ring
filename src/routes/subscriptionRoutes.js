@@ -7,11 +7,11 @@ const {
     cancelSubscription
 } = require('../controllers/subscriptionController');
 
-const { protect } = require('../middleware/auth');
+const { protect, authorize } = require('../middleware/auth');
 
 router.use(protect);
 
-router.get('/', getAllSubscriptions);
+router.get('/', authorize('admin'), getAllSubscriptions);
 router.post('/', subscribe);
 router.get('/me', getMySubscription);
 router.patch('/cancel', cancelSubscription);

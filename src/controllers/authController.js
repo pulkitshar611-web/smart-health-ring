@@ -20,7 +20,7 @@ const generateRefreshToken = (userId) => {
 // @access  Public
 exports.register = async (req, res, next) => {
     try {
-        const { fullName, email, phone, password } = req.body;
+        const { fullName, email, phone, password, dateOfBirth, gender } = req.body;
 
         // Validation
         if (!fullName || !email || !phone || !password) {

@@ -35,6 +35,11 @@ const userSchema = new mongoose.Schema({
         type: String, // Base64 string for now
         default: ''
     },
+    role: {
+        type: String,
+        enum: ['user', 'admin'],
+        default: 'user'
+    },
 
     // Profile
     dateOfBirth: Date,
@@ -90,6 +95,18 @@ const userSchema = new mongoose.Schema({
             type: Boolean,
             default: true
         }
+    },
+
+    // Cycle Tracking
+    cycleLength: {
+        type: Number,
+        default: 28,
+        min: 21,
+        max: 40
+    },
+    lastPeriodStart: {
+        type: Date,
+        default: null
     },
 
     // Metadata
