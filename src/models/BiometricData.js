@@ -66,7 +66,7 @@ const biometricDataSchema = new mongoose.Schema({
     // Source tracking (for hardware integration)
     source: {
         type: String,
-        enum: ['manual', 'device', 'estimated'],
+        enum: ['manual', 'device', 'estimated', 'computed'],
         default: 'manual'
     },
     deviceId: String,
